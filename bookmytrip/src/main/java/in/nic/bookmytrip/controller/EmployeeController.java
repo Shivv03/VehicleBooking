@@ -118,6 +118,7 @@ public class EmployeeController {
 	
 	@PostMapping("/newBooking")
 	public Response makeNewBooking(@RequestBody VehicleBookingForm formData) {
+		//receive json values and set to dto object
 		System.out.println(formData);
 		return staffService.makeNewBooking(formData);
 	}
