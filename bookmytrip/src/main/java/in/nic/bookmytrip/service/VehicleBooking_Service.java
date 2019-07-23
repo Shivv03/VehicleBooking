@@ -14,7 +14,7 @@ import in.nic.bookmytrip.pojo.TripMode;
 import in.nic.bookmytrip.pojo.VehicleTimings;
 
 
-public interface EmployeeService {
+public interface VehicleBooking_Service {
 	
 	List<TripMode> getTripMode();
 	

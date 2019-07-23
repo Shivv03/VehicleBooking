@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.nic.bookmytrip.pojo.Employee;
-import in.nic.bookmytrip.service.LoginService;
+import in.nic.bookmytrip.service.Login_Service;
 
 @RestController
 @RequestMapping("/api")
@@ -22,7 +22,7 @@ import in.nic.bookmytrip.service.LoginService;
 public class LoginController {
 	
 	@Autowired
-	private LoginService loginService;
+	private Login_Service loginService;
 	
 	@GetMapping("/employees")
 	public ResponseEntity<List<Employee>> findAllEmployees(){	

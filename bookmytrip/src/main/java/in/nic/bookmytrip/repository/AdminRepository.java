@@ -1,4 +1,4 @@
-package in.nic.bookmytrip.dao;
+package in.nic.bookmytrip.repository;
 
 public interface AdminRepository {
 

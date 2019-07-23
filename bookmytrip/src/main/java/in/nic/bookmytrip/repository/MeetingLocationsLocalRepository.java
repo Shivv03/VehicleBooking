@@ -1,4 +1,4 @@
-package in.nic.bookmytrip.dao;
+package in.nic.bookmytrip.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import in.nic.bookmytrip.dao.LoginRepository;
 import in.nic.bookmytrip.exceptions.DataNotFoundException;
 import in.nic.bookmytrip.pojo.Employee;
-import in.nic.bookmytrip.service.LoginService;
+import in.nic.bookmytrip.repository.LoginRepository;
+import in.nic.bookmytrip.service.Login_Service;
 
 @Service
-public class LoginServiceImpl implements LoginService {
+public class Login_ServiceImpl implements Login_Service {
 	
 	@Autowired
 	private LoginRepository loginRepository;

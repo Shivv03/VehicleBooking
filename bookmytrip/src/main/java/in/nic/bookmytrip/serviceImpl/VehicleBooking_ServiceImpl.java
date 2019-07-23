@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import in.nic.bookmytrip.dao.EmployeeRepository;
-import in.nic.bookmytrip.dao.MeetingLocationsLocalRepository;
 import in.nic.bookmytrip.dto.VehicleBookingForm;
 import in.nic.bookmytrip.exceptions.DuplicateEntryException;
 import in.nic.bookmytrip.exceptions.DataNotFoundException;
@@ -21,10 +19,12 @@ import in.nic.bookmytrip.pojo.OfficialsCount;
 import in.nic.bookmytrip.pojo.Response;
 import in.nic.bookmytrip.pojo.TripMode;
 import in.nic.bookmytrip.pojo.VehicleTimings;
-import in.nic.bookmytrip.service.EmployeeService;
+import in.nic.bookmytrip.repository.EmployeeRepository;
+import in.nic.bookmytrip.repository.MeetingLocationsLocalRepository;
+import in.nic.bookmytrip.service.VehicleBooking_Service;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class VehicleBooking_ServiceImpl implements VehicleBooking_Service {
 
 	@Autowired
 	private EmployeeRepository staffRepository;
@@ -144,7 +144,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Response makeNewBooking(VehicleBookingForm formData) {
 		
 		String message = staffRepository.makeNewBooking(formData);
-		System.out.println(message);
 		Response response = new Response(message);
 		return response;
 	}
