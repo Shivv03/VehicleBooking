@@ -14,13 +14,13 @@ public class OfficialsCount {
 	
 	@Id
 	@Column(name="no_of_officials")
-	private Integer noOfOfficials;
+	private String noOfOfficials;
 
-	public Integer getNoOfOfficials() {
+	public String getNoOfOfficials() {
 		return noOfOfficials;
 	}
 
-	public void setNoOfOfficials(Integer noOfOfficials) {
+	public void setNoOfOfficials(String noOfOfficials) {
 		this.noOfOfficials = noOfOfficials;
 	}
 

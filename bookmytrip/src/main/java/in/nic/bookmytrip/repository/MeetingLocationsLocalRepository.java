@@ -8,7 +8,7 @@ import in.nic.bookmytrip.pojo.MeetingLocationsLocal;
 
 public interface MeetingLocationsLocalRepository extends JpaRepository<MeetingLocationsLocal, Integer> {
 	
-	@Query("select count(M)>0 from MeetingLocationsLocal M where M.locationDesc=:locationDesc and M.employeeId=:employeeId")
+	@Query("select count(M)>0 from MeetingLocationsLocal M where lower(M.locationDesc)=:locationDesc and M.employeeId=:employeeId")
 	public boolean checkExistance(@Param("locationDesc") String locationDesc,@Param("employeeId") String employeeId );
 	
 	

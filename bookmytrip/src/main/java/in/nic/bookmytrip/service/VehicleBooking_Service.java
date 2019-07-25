@@ -40,5 +40,4 @@ public interface VehicleBooking_Service {
 	
 	Response makeNewBooking(VehicleBookingForm formData);
 	
-
 }

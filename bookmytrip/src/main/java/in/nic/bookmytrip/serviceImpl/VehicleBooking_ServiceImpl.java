@@ -1,5 +1,7 @@
 package in.nic.bookmytrip.serviceImpl;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +56,14 @@ public class VehicleBooking_ServiceImpl implements VehicleBooking_Service {
 
 	@Override
 	public List<VehicleTimings> getVehicleTimings() {
-		return staffRepository.getAll("From VehicleTimings", new HashMap<String,Object>());
+		List<VehicleTimings> timings =  staffRepository.getAll("From VehicleTimings", new HashMap<String,Object>());
+		
+		//To convert hh:mm:ss format(obtained from query) to hh:mm am/pm format
+		timings.forEach(t-> {
+			t.setTimings(DateTimeFormatter.ofPattern("hh:mm a").format(LocalTime.parse(t.getTimings())));
+		});
+		
+		return timings;
 	}
 
 	@Override
