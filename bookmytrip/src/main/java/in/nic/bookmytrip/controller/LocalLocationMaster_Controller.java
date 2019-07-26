@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.nic.bookmytrip.dto.QueryData;
 import in.nic.bookmytrip.pojo.MeetingLocationsLocal;
-import in.nic.bookmytrip.pojo.Response;
+import in.nic.bookmytrip.pojo.SuccessResponse;
 import in.nic.bookmytrip.service.VehicleBooking_Service;
 
 /**
@@ -55,31 +55,31 @@ public class LocalLocationMaster_Controller {
 	}
 	
 	@PostMapping("/meetingLocations")
-	public Response addMeetingLocationLocal(
+	public SuccessResponse addMeetingLocationLocal(
 			@RequestBody QueryData tempdata) {
 		
-		Response response = staffService.addMeetingLocationLocal(tempdata.getLocationDesc(), tempdata.getEmpId());
-		return response;	
+		SuccessResponse successResponse = staffService.addMeetingLocationLocal(tempdata.getLocationDesc(), tempdata.getEmpId());
+		return successResponse;	
 		
 	}
 	
 	@DeleteMapping("/meetingLocations")
-	public Response deleteMeetingLocationLocal(
+	public SuccessResponse deleteMeetingLocationLocal(
 			@RequestParam(value="locationId") Integer locationId) {
 		
-		Response response = staffService.deleteLocationLocal(locationId);
-		return response;	
+		SuccessResponse successResponse = staffService.deleteLocationLocal(locationId);
+		return successResponse;	
 		
 	}
 	
 	@PutMapping("/meetingLocations")
-	public Response updateMeetingLocationLocal(
+	public SuccessResponse updateMeetingLocationLocal(
 			@RequestParam(value="locationId") Integer locationId,
 			@RequestBody QueryData tempdata) {
 		
-		Response response = staffService.
+		SuccessResponse successResponse = staffService.
 				updateMeetingLocationsLocal(locationId,tempdata.getLocationDesc(), tempdata.getEmpId());
-		return response;	
+		return successResponse;	
 		
 	}
 

@@ -1,27 +1,54 @@
 package in.nic.bookmytrip.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VehicleBookingForm {
 	
+	@NotNull
+	@NotBlank
+	@Pattern(regexp="^\\d{1,7}$",message="Can only contain digits(0-9)")
 	private String empId;
 	
+	@NotNull
+	@NotBlank
+	/*@Pattern(regexp="^[a-z ,.'-]+$/i")*/
 	private String guestName;
 	
+	@NotNull
+	@NotBlank
+	/*@Pattern(regexp="(^$|[0-9]{10})")*/
+	@Pattern(regexp = "[0-9]{10}",message="Invalid Phone Number")
 	private String guestMobile;
 	
 	private String vehicleNo;
 	
+	@NotNull
+	@NotBlank
 	private String journeyDate;
 	
+	@NotNull
+	@NotBlank
 	private String startTime;
 	
+	@NotNull
+	@NotBlank
 	private String endTime;
 	
+	@NotNull
+	@NotBlank
 	private String startPoint;
 	
+	@NotNull
+	@NotBlank
 	private String endPoint;
+	
 	
 	private String flightNo;
 	
@@ -29,12 +56,24 @@ public class VehicleBookingForm {
 	
 	private String routeVia;
 	
+	@NotNull
+	@NotBlank
 	private String meetingPurpose;
 	
+	@NotNull
+	@NotBlank
+	@Pattern(regexp="[\\d]")
+	@Size(min = 1, max = 1)
 	private String passengerCount;
 	
+	@NotNull
+	@NotBlank
+	@Pattern(regexp = "[Y|N]", message = "Field Should either be 'Y' or 'N'")
 	private String roundTrip;
 	
+	@NotNull
+	@NotBlank
+	@Pattern(regexp="^\\d{1,7}$",message="Can only contain digits(0-9)")
 	private String bookedFor;
 
 	public String getEmpId() {

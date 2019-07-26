@@ -5,9 +5,10 @@ import java.util.List;
 
 import in.nic.bookmytrip.dto.VehicleBookingForm;
 import in.nic.bookmytrip.pojo.DefaultBookingProperties;
+import in.nic.bookmytrip.pojo.Employee;
 import in.nic.bookmytrip.pojo.MeetingPurpose;
 import in.nic.bookmytrip.pojo.OfficialsCount;
-import in.nic.bookmytrip.pojo.Response;
+import in.nic.bookmytrip.pojo.SuccessResponse;
 import in.nic.bookmytrip.pojo.MeetingLocations;
 import in.nic.bookmytrip.pojo.MeetingLocationsLocal;
 import in.nic.bookmytrip.pojo.TripMode;
@@ -32,12 +33,19 @@ public interface VehicleBooking_Service {
 	
 	MeetingLocationsLocal getMeetingLocationLocalById(Integer locationId);
 	
-	Response addMeetingLocationLocal(String locationDesc, String employeeId);
+	SuccessResponse addMeetingLocationLocal(String locationDesc, String employeeId);
 	
-	Response updateMeetingLocationsLocal(Integer locationId,String locationDesc, String employeeId);
+	SuccessResponse updateMeetingLocationsLocal(Integer locationId,String locationDesc, String employeeId);
 	
-	Response deleteLocationLocal(Integer locationId);
+	SuccessResponse deleteLocationLocal(Integer locationId);
 	
-	Response makeNewBooking(VehicleBookingForm formData);
+	SuccessResponse makeNewBooking(VehicleBookingForm formData);
+	
+	List<Employee> findEmployees();
+
+	Employee findEmployeeById(String empId);
+
+	
+	
 	
 }

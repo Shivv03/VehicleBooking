@@ -127,10 +127,17 @@ public class Employee {
 		this.employeeName = employeeName;
 	}
 
+	public Employee(String employeeId, String employeeName, String employeeMobile) {
+		this.employeeId = employeeId;
+		this.employeeName = employeeName;
+		this.employeeMobile = employeeMobile;
+	}
 
-
-	public Employee(Integer employeeRole) {
+	public Employee(String employeeId, String employeeName, String employeeMobile, Integer employeeRole) {
+		this.employeeId = employeeId;
 		this.employeeRole = employeeRole;
+		this.employeeName = employeeName;
+		this.employeeMobile = employeeMobile;
 	}
 
 	public Employee() {

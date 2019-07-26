@@ -14,11 +14,12 @@ import in.nic.bookmytrip.dto.VehicleBookingForm;
 import in.nic.bookmytrip.exceptions.DuplicateEntryException;
 import in.nic.bookmytrip.exceptions.DataNotFoundException;
 import in.nic.bookmytrip.pojo.DefaultBookingProperties;
+import in.nic.bookmytrip.pojo.Employee;
 import in.nic.bookmytrip.pojo.MeetingLocations;
 import in.nic.bookmytrip.pojo.MeetingLocationsLocal;
 import in.nic.bookmytrip.pojo.MeetingPurpose;
 import in.nic.bookmytrip.pojo.OfficialsCount;
-import in.nic.bookmytrip.pojo.Response;
+import in.nic.bookmytrip.pojo.SuccessResponse;
 import in.nic.bookmytrip.pojo.TripMode;
 import in.nic.bookmytrip.pojo.VehicleTimings;
 import in.nic.bookmytrip.repository.EmployeeRepository;
@@ -97,13 +98,13 @@ public class VehicleBooking_ServiceImpl implements VehicleBooking_Service {
 	
 	
 	@Override
-	public Response addMeetingLocationLocal(String locationDesc, String employeeId) {
+	public SuccessResponse addMeetingLocationLocal(String locationDesc, String employeeId) {
 		
 		//converting to lowercase to enable string matching
 				String templocationDesc = locationDesc.toLowerCase();
 				
 		MeetingLocationsLocal tempLocation;
-		Response response = null;
+		SuccessResponse successResponse = null;
 		boolean exist = locationsRepo.checkExistance(templocationDesc, employeeId);
 		
 		if(exist) {
@@ -112,19 +113,19 @@ public class VehicleBooking_ServiceImpl implements VehicleBooking_Service {
 		else {
 			tempLocation = new MeetingLocationsLocal(locationDesc, employeeId);
 			locationsRepo.save(tempLocation);
-			response = new Response(HttpStatus.OK.value(), "Location Added Successfully");
+			successResponse = new SuccessResponse(HttpStatus.OK.value(), "Location Added Successfully");
 		}
 		
-		return response;				
+		return successResponse;				
 	}
 	
 	@Override
-	public Response updateMeetingLocationsLocal(Integer locationId, String locationDesc, String employeeId) {
+	public SuccessResponse updateMeetingLocationsLocal(Integer locationId, String locationDesc, String employeeId) {
 		//converting to lowercase to enable string matching
 		String templocationDesc = locationDesc.toLowerCase();
 		
 		MeetingLocationsLocal tempLocation;
-		Response response = null;
+		SuccessResponse successResponse = null;
 		boolean exist = locationsRepo.checkExistance(templocationDesc, employeeId);
 		
 		if(exist) {
@@ -133,28 +134,44 @@ public class VehicleBooking_ServiceImpl implements VehicleBooking_Service {
 		else {
 			tempLocation = new MeetingLocationsLocal(locationId,locationDesc, employeeId);
 			locationsRepo.save(tempLocation);
-			response = new Response(HttpStatus.OK.value(), "Location Updated Successfully");
+			successResponse = new SuccessResponse(HttpStatus.OK.value(), "Location Updated Successfully");
 		}
 	
-		return response;
+		return successResponse;
 	}
 	
 	
 	@Override
-	public Response deleteLocationLocal(Integer locationId) {
+	public SuccessResponse deleteLocationLocal(Integer locationId) {
 		
 		locationsRepo.deleteById(locationId);
-		Response response = new Response(HttpStatus.OK.value(), "Location Deleted Successfully");
+		SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(), "Location Deleted Successfully");
 		
-		return response;
+		return successResponse;
 	}
 
 	@Override
-	public Response makeNewBooking(VehicleBookingForm formData) {
+	public SuccessResponse makeNewBooking(VehicleBookingForm formData) {
 		
 		String message = staffRepository.makeNewBooking(formData);
-		Response response = new Response(message);
-		return response;
+		SuccessResponse successResponse = new SuccessResponse(message);
+		return successResponse;
+	}
+
+	
+	@Override
+	public List<Employee> findEmployees() {
+		
+		return staffRepository.getEmployees();
+	}
+
+	/* (non-Javadoc)
+	 * @see in.nic.bookmytrip.service.VehicleBooking_Service#findEmployeeById()
+	 */
+	@Override
+	public Employee findEmployeeById(String empId) {
+		
+		return staffRepository.getEmployeeById(empId);
 	}
 
 	

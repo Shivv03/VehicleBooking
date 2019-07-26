@@ -15,7 +15,7 @@ public interface LoginRepository extends JpaRepository<Employee, String>  {
 	 @Query("select new Employee(e.employeeId,e.employeeName) from Employee e where e.employeeEmail = :emailId ")
 	 Employee getEmployeeByEmail(@Param("emailId") String emailId);
 	 
-	 @Query("select new Employee(e.employeeRole) from Employee e where e.employeePassword = :employeePassword and e.employeeId = :employeeId")
+	 @Query("select new Employee(e.employeeId,e.employeeName,e.employeeMobile,e.employeeRole) from Employee e where e.employeePassword = :employeePassword and e.employeeId = :employeeId")
 	 Employee getEmployeeRole(@Param("employeeId") String employeeId,@Param("employeePassword") String employeePassword);
 
 }

@@ -5,9 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class QueryData {
 	
+	
 	private String bookingDate;
 	
+	
 	private String empId;
+	
 	
 	private String locationDesc;
 	
@@ -19,7 +22,8 @@ public class QueryData {
 	public void setBookingDate(String bookingDate) {
 		this.bookingDate = bookingDate;
 	}
-
+	
+	
 	public String getEmpId() {
 		return empId;
 	}

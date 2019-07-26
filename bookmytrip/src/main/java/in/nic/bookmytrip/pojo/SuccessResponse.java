@@ -2,7 +2,7 @@ package in.nic.bookmytrip.pojo;
 
 import org.springframework.http.HttpStatus;
 
-public class Response {
+public class SuccessResponse {
 	
 	private int status;
 	private String message;
@@ -23,23 +23,23 @@ public class Response {
 		this.message = message;
 	}
 	
-	public Response() {
+	public SuccessResponse() {
 	
 	}
 
-	public Response(int status, String message) {
+	public SuccessResponse(int status, String message) {
 		this.status = status;
 		this.message = message;
 	}
 	
-	public Response(String message) {
+	public SuccessResponse(String message) {
 		this.status = HttpStatus.OK.value();
 		this.message = message;
 	}
 
 	@Override
 	public String toString() {
-		return "Response [status=" + status + ", message=" + message + "]";
+		return "SuccessResponse [status=" + status + ", message=" + message + "]";
 	}
 	
 }

@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import in.nic.bookmytrip.dto.VehicleBookingForm;
-import in.nic.bookmytrip.pojo.DefaultBookingProperties;
+import in.nic.bookmytrip.pojo.Employee;
 
 
-public interface EmployeeRepository extends JpaRepository<DefaultBookingProperties, String>,EmployeeRepositoryCustom{
+public interface EmployeeRepository extends JpaRepository<Employee, String>,EmployeeRepositoryCustom{
 	
 	@Query(nativeQuery = true, value ="select status as message from vehicle_available_slot_status_update"
 			+ "("
@@ -52,5 +52,13 @@ public interface EmployeeRepository extends JpaRepository<DefaultBookingProperti
 			"WHERE booking_date\\:\\:date >= to_date(:bookingDate,'dd/mm/yyyy')  and confirmation_status <> 'C'\r\n" + 
 			"ORDER BY booking_no\\:\\:numeric") 
 	List<Object[]> getBookingsList(@Param("bookingDate")String bookingDate);
+
+
+
+	@Query("select new Employee(e.employeeId,e.employeeName,e.employeeMobile) from Employee e where e.employeeRole='2' or e.employeeRole='1' or e.employeeRole='2' ")
+	List<Employee> getEmployees();
+
+	@Query("select new Employee(e.employeeId,e.employeeName,e.employeeMobile) from Employee e where e.employeeId = :empId ")
+	Employee getEmployeeById(@Param("empId")String empId);
 	
 }
