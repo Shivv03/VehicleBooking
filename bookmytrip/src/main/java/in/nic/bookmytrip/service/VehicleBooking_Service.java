@@ -45,6 +45,8 @@ public interface VehicleBooking_Service {
 
 	Employee findEmployeeById(String empId);
 
+	List<MeetingLocationsLocal> getMeetingLocations(int empId);
+
 	
 	
 	

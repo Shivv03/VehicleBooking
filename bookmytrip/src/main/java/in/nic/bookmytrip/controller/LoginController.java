@@ -28,7 +28,6 @@ public class LoginController {
 	public ResponseEntity<List<Employee>> findAllEmployees(){	
 		
 		List<Employee> empList = loginService.findAll();
-		System.out.println("here");
 		return new ResponseEntity<List<Employee>>(empList,HttpStatus.OK);
 	}
 	

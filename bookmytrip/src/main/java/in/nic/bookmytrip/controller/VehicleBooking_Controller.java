@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +28,7 @@ import in.nic.bookmytrip.service.VehicleBooking_Service;
 
 @RestController
 @RequestMapping("/api/staff/booking")
-@CrossOrigin(origins="http://10.163.19.174:4200")
+/*@CrossOrigin(origins="http://10.163.19.174:4200")*/
 public class VehicleBooking_Controller {
 	
 	@Autowired
@@ -76,7 +75,7 @@ public class VehicleBooking_Controller {
 	public List<MeetingLocationsLocal> getMeetingLocationsLocal(
 			@RequestParam(value="userId") int empId) {
 		
-		List<MeetingLocationsLocal> meetingLocationsLocal = staffService.getMeetingLocationsLocal(empId);
+		List<MeetingLocationsLocal> meetingLocationsLocal = staffService.getMeetingLocations(empId);
 		return meetingLocationsLocal;
 	}
 	

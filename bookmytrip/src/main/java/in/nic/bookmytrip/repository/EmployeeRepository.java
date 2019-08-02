@@ -41,15 +41,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, String>,Empl
 	
 	
 	
-	@Query(nativeQuery = true, value ="select booking_no, booked_for_id as emp_id, guest_name as emp_name,\r\n" + 
-			"(select vehicle_no from mst_vehicle where vehicle_code = v.vehicle_code) as vehicle_no,\r\n" + 
-			"start_point, end_point, via_route, purpose_of_visit,\r\n" + 
-			"to_char(v.booking_date,'dd/mm/yyyy') as booking_date, to_char(v.start_time,'HH:MI am') as char_start_time,\r\n" + 
-			"to_char(v.end_time,'HH:MI am') as char_end_time, no_of_officials,\r\n" + 
-			"(CASE WHEN round_trip = 'Y' THEN 'Round Trip' ELSE 'One Way' END) as mean_round_trip,\r\n" + 
-			"(select booking_status_desc FROM mst_booking_status WHERE booking_status_code = v.confirmation_status) as status_desc \r\n" + 
-			"from vehicle_booked_slot v \r\n" + 
-			"WHERE booking_date\\:\\:date >= to_date(:bookingDate,'dd/mm/yyyy')  and confirmation_status <> 'C'\r\n" + 
+	@Query(nativeQuery = true, value ="select booking_no, booked_for_id as emp_id, guest_name as emp_name," + 
+			"(select vehicle_no from mst_vehicle where vehicle_code = v.vehicle_code) as vehicle_no," + 
+			"start_point, end_point, via_route, purpose_of_visit," + 
+			"to_char(v.booking_date,'dd/mm/yyyy') as booking_date, to_char(v.start_time,'HH:MI am') as char_start_time," + 
+			"to_char(v.end_time,'HH:MI am') as char_end_time, no_of_officials," + 
+			"(CASE WHEN round_trip = 'Y' THEN 'Round Trip' ELSE 'One Way' END) as mean_round_trip," + 
+			"(select booking_status_desc FROM mst_booking_status WHERE booking_status_code = v.confirmation_status) as status_desc " + 
+			"from vehicle_booked_slot v " + 
+			"WHERE booking_date\\:\\:date >= to_date(:bookingDate,'dd/mm/yyyy')  and confirmation_status <> 'C'" + 
 			"ORDER BY booking_no\\:\\:numeric") 
 	List<Object[]> getBookingsList(@Param("bookingDate")String bookingDate);
 
@@ -60,5 +60,31 @@ public interface EmployeeRepository extends JpaRepository<Employee, String>,Empl
 
 	@Query("select new Employee(e.employeeId,e.employeeName,e.employeeMobile) from Employee e where e.employeeId = :empId ")
 	Employee getEmployeeById(@Param("empId")String empId);
+	
+	
+	
+	@Query(nativeQuery = true, value ="SELECT * from vehicle_booked_cancelled(:bookingId)") 
+	String cancelBooking(@Param("bookingId")Integer bookingId);
+
+
+
+	@Query(nativeQuery = true, value ="SELECT v.booking_no, v.booked_for_id as emp_id,guest_name as emp_name,"
+			+ " (select vehicle_no from mst_vehicle where vehicle_code = v.vehicle_code) as vehicle_no ,"
+			+ " v.start_point, v.end_point	, to_char(v.booking_date,'dd/mm/yyyy') as booking_date,"
+			+ "to_char(v.start_time,'HH:MI am') as char_start_time,"
+			+ "to_char(v.end_time,'HH:MI am') as char_end_time,"
+			+ "(select booking_status_desc FROM mst_booking_status "
+			+ "WHERE booking_status_code = v.confirmation_status) as status_desc FROM vehicle_booked_slot v "
+			+ "WHERE booking_date\\:\\:date >= to_date(:bookingDate,'dd/mm/yyyy') and "
+			+ "(CASE WHEN ((select distinct emp_role from mst_emp_login WHERE emp_id = '\"+empId+\"' ) = 5)"
+			+ " THEN emp_id = '\"+empId+\"' else booked_for_id = '\"+empId+\"' end) and"
+			+ " confirmation_status <> 'C' ORDER BY booking_no\\:\\:numeric") 
+	List<Object[]> getBookingsList_forCancelMenu(@Param("bookingDate")String bookingDate);
+
+
+
+	
+	
+	
 	
 }

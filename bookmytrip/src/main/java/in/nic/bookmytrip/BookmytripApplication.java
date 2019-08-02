@@ -2,6 +2,10 @@ package in.nic.bookmytrip;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
 public class BookmytripApplication {
@@ -10,7 +14,7 @@ public class BookmytripApplication {
 		SpringApplication.run(BookmytripApplication.class, args);
 	}
 	
-	/*@Bean
+	@Bean
 	public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
@@ -24,5 +28,5 @@ public class BookmytripApplication {
         config.addAllowedMethod("DELETE");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
-    }*/
+    }
 }

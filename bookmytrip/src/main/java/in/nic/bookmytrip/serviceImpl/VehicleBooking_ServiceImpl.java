@@ -77,6 +77,14 @@ public class VehicleBooking_ServiceImpl implements VehicleBooking_Service {
 	public List<MeetingLocationsLocal> getMeetingLocationsLocal(int empId) {
 		HashMap<String,Object> params = new HashMap<String,Object>();
 		params.put("empId", String.valueOf(empId));
+		return staffRepository.getAll("From MeetingLocationsLocal where employeeId=:empId",params);
+	}
+	
+	
+	@Override
+	public List<MeetingLocationsLocal> getMeetingLocations(int empId) {
+		HashMap<String,Object> params = new HashMap<String,Object>();
+		params.put("empId", String.valueOf(empId));
 		params.put("DefaultEmpId","9999");
 		return staffRepository.getAll("From MeetingLocationsLocal where employeeId=:empId or employeeId=:DefaultEmpId",params);
 	}
